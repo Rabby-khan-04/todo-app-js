@@ -18,7 +18,8 @@
                         picton_blue: "#3fd4f4",
                         sunglow: "#fac608",
                         waterloo: "#717082",
-                        gainsboro: "#e4e4e4"
+                        gainsboro: "#e4e4e4",
+                        slate_gray: "#717082"
 
                     }
                 }
@@ -30,12 +31,12 @@
 <body class="bg-gradient-to-r from-medium_purple to-lavender_indigo">
 
     <!-- Section -->
-    <section class="flex justify-center h-screen w-screen py-28">
+    <section class="flex justify-center h-screen w-screen py-28 relative">
         <!-- App Container -->
         <div class="w-10/12 border-4 border-white rounded-3xl overflow-hidden flex">
             <!-- Sidebar -->
             <div class="bg-white p-6 h-full w-80">
-                <div class="flex items-center gap-4 pb-8">
+                <div class="flex items-center gap-3 task_category gap-4 pb-8">
                     <img src="./src/avater.jpg" alt="" class="size-16 rounded-full cursor-pointer">
                     <div>
                         <p class="text-xl text-waterloo font-bold">Do-it</p>
@@ -51,15 +52,15 @@
                             <span class="text-2xl text-medium_purple"><i class="fa-regular fa-calendar"></i></span>
                             <div>
                                 <h2 class="text-2xl text-waterloo font-medium">Today Tasks</h2>
-                                <div class="flex items-center gap-5">
+                                <div class="flex items-center gap-3 task_category gap-5">
                                     <div class="size-4 bg-pastel_pink rounded-full"></div>
                                     <p class="text-xl text-waterloo">Personal</p>
                                 </div>
-                                <div class="flex items-center gap-5">
+                                <div class="flex items-center gap-3 task_category gap-5">
                                     <div class="size-4 bg-picton_blue rounded-full"></div>
                                     <p class="text-xl text-waterloo">Freelance</p>
                                 </div>
-                                <div class="flex items-center gap-5">
+                                <div class="flex items-center gap-3 task_category gap-5">
                                     <div class="size-4 bg-sunglow rounded-full"></div>
                                     <p class="text-xl text-waterloo">Work</p>
                                 </div>
@@ -83,10 +84,83 @@
 
             </div>
             <!-- Content -->
-            <div class="grow"></div>
+            <div class="grow p-20">
+                <h2 class="text-3xl font-semibold text-white">Today main focus</h2>
+                <h1 class="text-4xl font-bold text-white">Companion for Getting Things Done</h1>
+
+                <div class="my-10">
+                    <div class="bg-white rounded-3xl overflow-hidden flex items-center px-4 py-1 gap-2">
+                        <div class="size-4 bg-pastel_pink rounded-full"></div>
+                        <div class="size-4 bg-picton_blue rounded-full"></div>
+                        <div class="size-4 bg-sunglow rounded-full"></div>
+                        <input type="text" id="add_task"
+                            class="h-16 p-5 placeholder:text-gainsboro text-xl text-waterloo placeholder:text-xl grow outline-none"
+                            placeholder="What is your next task?">
+                        <span class="input_icon text-2xl text-medium_purple"><i class="fa-regular fa-clock"></i></span>
+                        <span class="input_icon text-2xl text-medium_purple"><i
+                                class="fa-regular fa-calendar"></i></span>
+                        <button class="text-2xl text-medium_purple hidden" id="input_arrow"><i
+                                class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <div class="space-y-4 overflow-y-scroll h-80" id="task_container">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute inset-0 w-full h-full bg-black bg-opacity-70 hidden" id="modal_body">
+            <div class="text-right">
+                <button class="text-2xl text-white inline-block mt-5 mr-5" id="modal_close">
+                    <i class="fa-regular fa-circle-xmark"></i>
+                </button>
+            </div>
+            <div class="w-full h-full flex justify-center items-center">
+                <div class="bg-white w-3/6 h-96 rounded-3xl p-10">
+                    <form id="task_form">
+                        <h2 class="text-3xl text-waterloo font-semibold mb-2">Select task category </h2>
+                        <div class="flex items-center gap-3 task_category">
+                            <input type="radio" required value="Personal" name="task_category" id="personal">
+                            <label for="personal" class="flex items-center gap-4 cursor-pointer">
+                                <div class="size-4 bg-pastel_pink rounded-full"></div>
+                                <span class="text-xl text-waterloo">Personal</span>
+                            </label>
+                        </div>
+                        <div class="flex items-center gap-3 task_category">
+                            <input type="radio" required value="Freelance" name="task_category" id="freelance">
+                            <label for="freelance" class="flex items-center gap-4 cursor-pointer">
+                                <div class="size-4 bg-picton_blue rounded-full"></div>
+                                <span class="text-xl text-waterloo">Freelance</span>
+                            </label>
+                        </div>
+                        <div class="flex items-center gap-3 task_category">
+                            <input type="radio" required value="Work" name="task_category" id="work">
+                            <label for="work" class="flex items-center gap-4 cursor-pointer">
+                                <div class="size-4 bg-sunglow rounded-full"></div>
+                                <span class="text-xl text-waterloo">Work</span>
+                            </label>
+                        </div>
+
+                        <div class="flex flex-col mt-4">
+                            <label class="text-3xl text-waterloo font-semibold mb-2" for="time">Select task's time
+                            </label>
+                            <input type="time"
+                                class="h-16 p-5 placeholder:text-gainsboro border border-medium_purple rounded-xl text-xl text-waterloo placeholder:text-xl grow outline-none"
+                                id="time" placeholder="Select task's time" name="task_time" required>
+                        </div>
+
+                        <button id="submit_btn" type="submit"
+                            class="w-full p-4 bg-medium_purple text-white text-xl font-bold rounded-xl block mt-4">Submit</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </section>
 
+
+    <script src="./utility.js"></script>
+    <script src="./app.js"></script>
 </body>
 
 </html>
